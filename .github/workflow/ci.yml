@@ -1,0 +1,22 @@
+name: ci
+
+on:
+  push:
+    branches: master
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_AUTHEN }}
+      - 
+        name: Build image
+        run: docker build -t namnv1706/namnv:ubuntu-latest .
+      -
+        name: Update docker image
+        run: docker push namnv1706/namnv:ubuntu-latest
