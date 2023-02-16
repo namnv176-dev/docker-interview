@@ -14,10 +14,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_AUTHEN }}
-      - run: ls
       - 
-        name: Build image
-        run: docker build -t namnv1706/namnv:ubuntu-latest .
-      -
-        name: Update docker image
-        run: docker push namnv1706/namnv:ubuntu-latest
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: namnv1706/namnv:ubuntu-latest
