@@ -12,7 +12,6 @@ const server = http.createServer((req, res) => {
   if (req.url === "/favicon.ico") {
     res.writeHead(200, { "Content-Type": "image/x-icon" });
     res.end();
-    console.log("favicon requested");
     return;
   } else {
     res.statusCode = 200;
@@ -34,8 +33,6 @@ const server = http.createServer((req, res) => {
           },
         };
         const reqToWeatherAPI = http.request(options, (response) => {
-          console.log(`STATUS: ${response.statusCode}`);
-          console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
           response.setEncoding("utf8");
           response.on("data", (chunk) => {
             res.end(chunk);
